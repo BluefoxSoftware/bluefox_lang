@@ -8,7 +8,7 @@
 
 std::vector<Token> make_token_vec(std::string data) {
     // split all characters that have meanings
-    std::regex delimiterRegex("([\\\\;\\n\\s\"*+\\-/()[\\]{}'=<>!?,%]|[^\\\\;\\n\\s\"*+\\-/()[\\]{}'=<>!?,%]+)");
+    std::regex delimiterRegex("([\\\\:;\\n\\s\"*+\\-/()[\\]{}'=<>!?,%]|[^\\\\:;\\n\\s\"*+\\-/()[\\]{}'=<>!?,%]+)");
 
     std::sregex_token_iterator it(data.begin(), data.end(), delimiterRegex, 1);
     std::sregex_token_iterator end;
@@ -133,6 +133,7 @@ std::vector<Token> make_token_vec(std::string data) {
             combined == ">=" ||   // greater or equal
             combined == "<=" ||   // less or equal
             combined == "<<" ||   // bitwise shift left
+            combined == "::" ||   // scope operator
             combined == ">>" ||   // bitwise shift right
             combined == "+=" ||   // add and set
             combined == "-=" ||   // subtract and set
@@ -171,6 +172,8 @@ std::vector<Token> make_token_vec(std::string data) {
             !token.compare("*") ||   // multiply
             !token.compare("/") ||   // divide
             !token.compare("%") ||   // modulo
+            !token.compare(":") ||   // type
+            !token.compare("::") ||  // scope operator
             !token.compare("&&") ||  // and
             !token.compare("||") ||  // or
             !token.compare("!") ||   // not
@@ -207,6 +210,7 @@ std::vector<Token> make_token_vec(std::string data) {
             !token.compare("double") ||
             !token.compare("bool") ||
             !token.compare("char") ||
+            !token.compare("string") ||
             !token.compare("true") ||
             !token.compare("false") ||
             !token.compare("if") ||
@@ -226,9 +230,9 @@ std::vector<Token> make_token_vec(std::string data) {
             !token.compare("final") ||
             !token.compare("const") ||
             !token.compare("enum") ||
-            !token.compare("data") ||
             !token.compare("throw") ||
             !token.compare("try") ||
+            !token.compare("err") ||
             !token.compare("catch") ||
             !token.compare("mutable") ||
             !token.compare("virtual") ||
