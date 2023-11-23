@@ -1,0 +1,3 @@
+public fn bar() {
+    println("this was called from a library function!");
+}

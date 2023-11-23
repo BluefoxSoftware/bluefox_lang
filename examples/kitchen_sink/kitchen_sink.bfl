@@ -1,0 +1,49 @@
+use foo::*;
+use std::vector::Vector;
+
+enum BookType {
+
+}
+
+/*
+STRUCTS:
+    All structs must have an initializer and all child variables must be public
+*/
+struct BookContents(val pages: Vector<string>, author_name: string) { // kotlin like constructor, the () is not needed if the constructor needs no arguments
+    //               ^
+    // use val or var in args to indicate that you want to keep the argument in the struct
+    val author: string,
+
+    init {
+        if (!author_name.to_lower().compare("J. K. Rowling")) {
+            return err("fuck J. K. Rowling");
+        }
+        this.author = author_name;
+        return this; // structs can return errors instead of completing so a return this is needed
+    }
+
+    static fn foo() {
+        println("dingus"):
+    }
+    fn foo() {
+        println(this.author);
+    }
+    // two different functions / vars can have the same name in a class / struct as long as they are accessed unique ways
+    // in this static foo is accessed using BookContents::foo();
+    // and normal foo is accessed using some_book_contents_object.foo();
+}
+
+class Book {
+
+}
+
+fn main() -> int {
+    val hello: string = "hello";
+    var world = "world";
+
+    println(hello.concat(world));
+
+    // can't do this because hello was declared with val
+    // hello = "not work";
+    world += "!";
+}
